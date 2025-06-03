@@ -50,6 +50,21 @@
       border: none;
       display: none;
     }
+    #accountInfo {
+      margin-top: 20px;
+      display: none;
+      background-color: #2a2a2a;
+      padding: 15px;
+      border-radius: 8px;
+    }
+    .copy-field {
+      background-color: #333;
+      color: #fff;
+      padding: 10px;
+      border-radius: 5px;
+      margin: 5px 0;
+      cursor: pointer;
+    }
   </style>
 </head>
 <body>
@@ -65,6 +80,13 @@
     <h2>Welcome, @tigycrk</h2>
     <div id="timer">Unlocking in 60 seconds...</div>
     <iframe id="video" src="https://www.youtube.com/embed/3T3UAn2IdkA?si=-Rs9UF_Vq3-AkhN1" allowfullscreen></iframe>
+
+    <div id="accountInfo">
+      <h3>🎁 Exclusive Reward: Free Cookie Run: Kingdom Account</h3>
+      <p>Thanks for watching "3,000 PULLS! COLLAB! COONER VS TIGY"</p>
+      <div class="copy-field" onclick="copyToClipboard('pfzg6jdm6gukt@hotmail.com')">ID: pfzg6jdm6gukt@hotmail.com (Click to copy)</div>
+      <div class="copy-field" onclick="copyToClipboard('bU18ruHiW')">Password: bU18ruHiW (Click to copy)</div>
+    </div>
   </div>
 
   <script>
@@ -90,17 +112,26 @@
       let timeLeft = 60;
       const timerElement = document.getElementById("timer");
       const videoElement = document.getElementById("video");
+      const accountInfo = document.getElementById("accountInfo");
 
       const countdown = setInterval(() => {
         timeLeft--;
         timerElement.textContent = `Unlocking in ${timeLeft} seconds...`;
         if (timeLeft <= 0) {
           clearInterval(countdown);
-          timerElement.textContent = "Unlocked! Enjoy the video below:";
+          timerElement.textContent = "Unlocked! Enjoy the video and your exclusive reward below:";
           videoElement.style.display = "block";
+          accountInfo.style.display = "block";
         }
       }, 1000);
+    }
+
+    function copyToClipboard(text) {
+      navigator.clipboard.writeText(text).then(() => {
+        alert("Copied to clipboard: " + text);
+      });
     }
   </script>
 </body>
 </html>
+
