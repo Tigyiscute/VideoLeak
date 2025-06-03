@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Exclusive Access</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #111;
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .login-container, .content-container {
+      background-color: #1c1c1c;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+      display: none;
+    }
+    .login-container.active, .content-container.active {
+      display: block;
+    }
+    input {
+      padding: 10px;
+      margin: 10px 0;
+      width: 100%;
+      border: none;
+      border-radius: 5px;
+    }
+    button {
+      padding: 10px;
+      background-color: #444;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    #timer {
+      font-size: 1.5em;
+      margin-top: 20px;
+    }
+    iframe {
+      width: 100%;
+      height: 315px;
+      border: none;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="login-container active" id="loginContainer">
+    <h2>Login</h2>
+    <input type="text" id="username" placeholder="Discord Username (e.g., @user)">
+    <input type="password" id="password" placeholder="Password">
+    <button onclick="login()">Login</button>
+    <p id="loginError" style="color: red; display: none;">Invalid credentials.</p>
+  </div>
+
+  <div class="content-container" id="contentContainer">
+    <h2>Welcome, @tigycrk</h2>
+    <div id="timer">Unlocking in 60 seconds...</div>
+    <iframe id="video" src="https://www.youtube.com/embed/3T3UAn2IdkA?si=-Rs9UF_Vq3-AkhN1" allowfullscreen></iframe>
+  </div>
+
+  <script>
+    const loginData = {
+      "@tigycrk": "Tigy13"
+    };
+
+    function login() {
+      const username = document.getElementById("username").value.trim();
+      const password = document.getElementById("password").value;
+      const loginError = document.getElementById("loginError");
+
+      if (loginData[username] === password) {
+        document.getElementById("loginContainer").classList.remove("active");
+        document.getElementById("contentContainer").classList.add("active");
+        startTimer();
+      } else {
+        loginError.style.display = "block";
+      }
+    }
+
+    function startTimer() {
+      let timeLeft = 60;
+      const timerElement = document.getElementById("timer");
+      const videoElement = document.getElementById("video");
+
+      const countdown = setInterval(() => {
+        timeLeft--;
+        timerElement.textContent = `Unlocking in ${timeLeft} seconds...`;
+        if (timeLeft <= 0) {
+          clearInterval(countdown);
+          timerElement.textContent = "Unlocked! Enjoy the video below:";
+          videoElement.style.display = "block";
+        }
+      }, 1000);
+    }
+  </script>
+</body>
+</html>
